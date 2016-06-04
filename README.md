@@ -3,8 +3,9 @@ arnaudblancher.docker_provisionning
 
 Goal : take an ansible inventory and create one docker container for each listed hosts.
 
-After you can deploy your ansible playbook on theses docker-inventory and make full tests in a new and clean environnement without new virtual machines.
+After you can deploy your favorite ansible playbook on theses docker-inventory and make easily and safely full tests in a new and clean environnement without new virtual machines.
 
+Afer your tests, just destroy theses dockers with ansible role docker_unprovisonning 
 
 Requirements
 ------------
