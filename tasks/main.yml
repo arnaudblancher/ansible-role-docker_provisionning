@@ -1,0 +1,31 @@
+---
+
+- name: "docker' images construction"
+  docker_image: path="{{ role_path }}/dockerfiles/{{ item }}" dockerfile="Dockerfile" name="{{ item }}" state=present
+  with_items: [ "{{ docker_provisionning_image }}" ]
+
+- name: "network creation {{ docker_provisionning_net }}"
+  shell: docker network inspect {{ docker_provisionning_net }} || docker network create {{ docker_provisionning_net }}
+  register: _
+  changed_when: "'No such network' in _.stderr"
+
+- name: "containers creation"
+  docker:
+    name: "{{item}}"
+    hostname: "{{item}}"
+    net: "{{ docker_provisionning_net }}"
+    image: "{{ docker_provisionning_image }}"
+    state: "started"
+    privileged: "yes"
+    command: "tail -f /dev/null"
+  when: item != "localhost"
+  with_items: "{{groups['all']}}"
+
+- name: "network check {{ docker_provisionning_net }}"
+  shell: docker network inspect {{ docker_provisionning_net }} | grep '\(Name\|IPv4Address\)'
+  register: res
+  when: docker_provisionning_info == true
+
+- debug: var=res.stdout_lines
+  when: docker_provisionning_info == true
+
