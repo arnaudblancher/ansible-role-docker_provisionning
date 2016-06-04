@@ -32,7 +32,7 @@ apt-get install docker-engine python-docker
 Role Variables
 --------------
 
-please see defaults/main.yml
+please see [defaults/main.yml](defaults/main.yml)
 
 Dependencies
 ------------
@@ -41,7 +41,7 @@ None
 
 Example Playbook
 ----------------
-Please see subdirectory ./demo/
+Please see subdirectory [./demo/](./demo/)
 
 cat demo/docker-provisionning.yml
 ```yaml
@@ -81,6 +81,7 @@ Author Information
 ------------------
 
 Arnaud Blancher
-https://github.com/arnaudblancher/ansible-role-docker_provisionning
+
+[https://github.com/arnaudblancher/ansible-role-docker_provisionning](https://github.com/arnaudblancher/ansible-role-docker_provisionning)
 
 
