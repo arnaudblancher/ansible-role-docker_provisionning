@@ -13,18 +13,21 @@ docker-engine
 
 Make sure your have a docker-engine running, test with (probably as root ...)
 
- docker info
+```bash
+docker info
+```
 
 ###If you need, install docker-engine
 
 Here, docker-engine 1.11 on Debian Jessie
 
- apt-get remove docker.io python-docker
- apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
- echo 'deb https://apt.dockerproject.org/repo debian-jessie main' > /etc/apt/sources.list.d/docker.list
- apt-get update
- apt-get install docker-engine python-docker
-
+```bash
+apt-get remove docker.io python-docker
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo 'deb https://apt.dockerproject.org/repo debian-jessie main' > /etc/apt/sources.list.d/docker.list
+apt-get update
+apt-get install docker-engine python-docker
+```
 
 Role Variables
 --------------
@@ -41,18 +44,22 @@ Example Playbook
 
 please, see demo/docker-provisionning.yml
 
-  - name: "create all docker image and containers for all hosts listed in inventory"
-    hosts: localhost
-    gather_facts: no
+```yaml
+- name: "create all docker image and containers for all hosts listed in inventory"
+  hosts: localhost
+  gather_facts: no
 
-    roles:
-      - { role : docker_provisionning,
-        docker_provisionning_image: "ubuntu1404",
-        docker_provisionning_net: "ansible_myplateform" }
+  roles:
+    - { role : docker_provisionning,
+      docker_provisionning_image: "ubuntu1404",
+      docker_provisionning_net: "ansible_myplateform" }
+```
 
 call :
 
- ansible-playbook  -i inventory/docker/ docker-provisionning.yml
+```bash
+ansible-playbook  -i inventory/docker/ docker-provisionning.yml
+```
 
 License
 -------
