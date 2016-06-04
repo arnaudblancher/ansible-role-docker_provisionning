@@ -3,13 +3,13 @@ arnaudblancher.docker_provisionning
 
 Goal : take an ansible inventory and create one docker container for each listed hosts.
 
-After you can deploy your ansible playbook on theses docker-inevtory and make full tests in a new and clean environnement.
+After you can deploy your ansible playbook on theses docker-inventory and make full tests in a new and clean environnement without new virtual machines.
 
 
 Requirements
 ------------
 
-docker-engine
+- docker-engine
 
 Make sure your have a docker-engine running, test with (probably as root ...)
 
@@ -41,9 +41,9 @@ None
 
 Example Playbook
 ----------------
+Please see subdirectory ./demo/
 
-please, see demo/docker-provisionning.yml
-
+cat demo/docker-provisionning.yml
 ```yaml
 - name: "create all docker image and containers for all hosts listed in inventory"
   hosts: localhost
@@ -55,8 +55,19 @@ please, see demo/docker-provisionning.yml
       docker_provisionning_net: "ansible_myplateform" }
 ```
 
-call :
+cat inventory/docker/000_groups
+```yaml
+[mysql]
+dock-mysql
 
+[apache]
+dock-apache
+
+[all:vars]
+ansible_connection=docker
+```
+
+call :
 ```bash
 ansible-playbook  -i inventory/docker/ docker-provisionning.yml
 ```
