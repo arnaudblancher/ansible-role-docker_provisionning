@@ -5,7 +5,7 @@ Goal : take an ansible inventory and create one docker container for each listed
 
 After you can deploy your favorite ansible playbook on theses docker-inventory and make easily and safely full tests in a new and clean environnement without new virtual machines.
 
-Afer your tests, just destroy theses dockers with ansible role docker_unprovisonning 
+Afer your tests, just destroy theses dockers with ansible role arnaudblancher.docker_unprovisonning 
 
 Requirements
 ------------
@@ -18,7 +18,7 @@ Make sure your have a docker-engine running, test with (probably as root ...)
 docker info
 ```
 
-###If you need, install docker-engine
+### If you need, install docker-engine
 
 Here, docker-engine 1.11 on Debian Jessie
 
@@ -51,7 +51,7 @@ cat demo/docker-provisionning.yml
   gather_facts: no
 
   roles:
-    - { role : docker_provisionning,
+    - { role : arnaudblancher.docker_provisionning,
       docker_provisionning_image: "ubuntu1404",
       docker_provisionning_net: "ansible_myplateform" }
 ```

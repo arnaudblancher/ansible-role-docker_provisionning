@@ -7,7 +7,7 @@
   gather_facts: no
 
   roles:
-    - { role : docker_provisionning,
+    - { role : arnaudblancher.docker_provisionning,
       docker_provisionning_image: "ubuntu1404",
       docker_provisionning_net: "ansible_myplateform" }
 
