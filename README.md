@@ -56,7 +56,7 @@ cat demo/docker-provisionning.yml
       docker_provisionning_net: "ansible_myplateform" }
 ```
 
-cat inventory/docker/000_groups
+cat inventory/docker/000_hosts
 ```yaml
 [mysql]
 dock-mysql

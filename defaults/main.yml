@@ -6,7 +6,7 @@
 docker_provisionning_image: "ubuntu1404"
 
 # the name of the docker network witch will be create - free name
-docker_provisionning_net: "ansible_pfs"
+docker_provisionning_net: "ansible_plateform"
 
 # if you want debug info
 # docker_provisionning_info: true|false
