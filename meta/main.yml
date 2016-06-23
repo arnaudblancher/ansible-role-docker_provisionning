@@ -1,6 +1,6 @@
 galaxy_info:
   author: Arnaud Blancher
-  description:  Take an ansible inventory and create one docker container for each listed hosts. After you can deploy your favorite ansible playbook on theses docker-inventory and make easily and safely full tests in a new and clean environnement without new virtual machines.
+  description:  Take an ansible inventory and create one docker container for each listed hosts. After you can deploy your favorite ansible playbook on theses docker-inventory and make easily and safely full tests in a new and clean environnement.
   license: GPLv3
   min_ansible_version: 2.0
 
