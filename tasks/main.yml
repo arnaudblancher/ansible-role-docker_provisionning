@@ -26,6 +26,7 @@
   register: res
   when: docker_provisionning_info == true
 
-- debug: var=res.stdout_lines
+- name: "ipv4 address"
+  debug: var=res.stdout_lines
   when: docker_provisionning_info == true
 
