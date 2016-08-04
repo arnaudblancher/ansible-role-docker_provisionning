@@ -30,6 +30,17 @@ apt-get update
 apt-get install docker-engine python-docker
 ```
 
+On Ubuntu Trusty,
+
+replace
+ python-docker
+
+by :
+
+```bash
+sudo apt-get install python-pip
+sudo pip install docker-py```
+
 Role Variables
 --------------
 
