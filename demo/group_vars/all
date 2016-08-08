@@ -1,0 +1,5 @@
+---
+
+# override the default/main.yml os for docker_provisionning
+docker_provisionning_image: "ubuntu1404"
+

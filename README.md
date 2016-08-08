@@ -39,7 +39,8 @@ by :
 
 ```bash
 sudo apt-get install python-pip
-sudo pip install docker-py```
+sudo pip install docker-py
+```
 
 Role Variables
 --------------
@@ -63,20 +64,27 @@ cat demo/docker-provisionning.yml
 
   roles:
     - { role : arnaudblancher.docker_provisionning,
-      docker_provisionning_image: "ubuntu1404",
       docker_provisionning_net: "ansible_myplateform" }
 ```
 
 cat inventory/docker/000_hosts
 ```yaml
 [mysql]
+# use the default docker_provisionning_image configure in defaults/main.yml
 dock-mysql
 
 [apache]
-dock-apache
+# specify a specific docker_provisionning_image for this container
+dock-apache docker_provisionning_image="ubuntu1604"
 
 [all:vars]
 ansible_connection=docker
+```
+
+cat group_vars/all
+```yaml
+# override the default/main.yml os for docker_provisionning
+docker_provisionning_image: "ubuntu1404"
 ```
 
 call :

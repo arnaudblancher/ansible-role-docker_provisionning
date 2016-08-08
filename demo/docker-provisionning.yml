@@ -1,5 +1,7 @@
 # call:
 # ansible-playbook  -i inventory/docker/ docker-provisionning.yml
+# or 
+# sudo ansible-playbook  -i inventory/docker/ docker-provisionning.yml
 ---
 
 - name: "create all docker images and container for all hosts listed in inventory in a dedicated network"
@@ -8,6 +10,5 @@
 
   roles:
     - { role : arnaudblancher.docker_provisionning,
-      docker_provisionning_image: "ubuntu1404",
       docker_provisionning_net: "ansible_myplateform" }
 

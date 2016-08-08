@@ -1,16 +1,19 @@
 ---
 
-- name: "info dockerfilepath"
-  debug: msg="{{ role_path }}/dockerfiles/{{ item }}"
-  with_items: [ "{{ docker_provisionning_image }}" ]
+#- name: "display variables"
+#  debug: var=vars
+
+- name: "host/dockerfile wanted"
+  debug: msg="host {{item}} -> docker_provisionning_image {{ vars['hostvars'][item]['docker_provisionning_image'] }}"
+  with_items: "{{hostvars}}"
 
 - name: "docker images construction"
   docker_image:
-    path: "{{ role_path }}/dockerfiles/{{ item }}"
+    path: "{{ role_path }}/dockerfiles/{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
     dockerfile: "Dockerfile"
-    name: "{{ item }}"
+    name: "{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
     state: present
-  with_items: [ "{{ docker_provisionning_image }}" ]
+  with_items: "{{hostvars}}"
 
 - name: "network creation {{ docker_provisionning_net }}"
   shell: docker network inspect {{ docker_provisionning_net }} || docker network create {{ docker_provisionning_net }}
@@ -22,12 +25,13 @@
     name: "{{item}}"
     hostname: "{{item}}"
     net: "{{ docker_provisionning_net }}"
-    image: "{{ docker_provisionning_image }}"
+    image: "{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
     state: "started"
     privileged: "yes"
     command: "tail -f /dev/null"
   when: item != "localhost"
-  with_items: "{{groups['all']}}"
+  with_items: "{{hostvars}}"
+
 
 - name: "network check {{ docker_provisionning_net }}"
   shell: docker network inspect {{ docker_provisionning_net }} | grep '\(Name\|IPv4Address\)'
