@@ -5,7 +5,7 @@ dock-mysql
 dock-apache
 
 [jmeter]
-dock-jmeter
+dock-jmeter docker_provisionning_image="jmeter2.13"
 
 [all:vars]
 ansible_connection=docker
