@@ -4,5 +4,8 @@ dock-mysql
 [apache]
 dock-apache
 
+[jmeter]
+dock-jmeter
+
 [all:vars]
 ansible_connection=docker
