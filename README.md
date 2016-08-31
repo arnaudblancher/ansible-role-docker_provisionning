@@ -77,6 +77,9 @@ dock-mysql
 # specify a specific docker_provisionning_image for this container
 dock-apache docker_provisionning_image="ubuntu1604"
 
+[jmeter]
+dock-jmeter docker_provisionning_image="jmeter2.13"
+
 [all:vars]
 ansible_connection=docker
 ```
