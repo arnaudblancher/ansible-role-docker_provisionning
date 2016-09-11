@@ -71,14 +71,14 @@ cat inventory/docker/000_hosts
 ```yaml
 [mysql]
 # use the default docker_provisionning_image configure in defaults/main.yml
-dock-mysql
+dock_mysql
 
 [apache]
 # specify a specific docker_provisionning_image for this container
-dock-apache docker_provisionning_image="ubuntu1604"
+dock_apache docker_provisionning_image="ubuntu1604"
 
 [jmeter]
-dock-jmeter docker_provisionning_image="jmeter2.13"
+dock_jmeter docker_provisionning_image="jmeter2.13"
 
 [all:vars]
 ansible_connection=docker
@@ -88,6 +88,19 @@ cat group_vars/all
 ```yaml
 # override the default/main.yml os for docker_provisionning
 docker_provisionning_image: "ubuntu1404"
+```
+
+cat inventory/docker/group_vars/all 
+```yaml
+# add host aliases for containers
+docker_provisionning_aliases:
+  dock_mysql:
+    - "bdd01"
+    - "bdd02"
+  dock_apache:
+    - www01
+    - www02
+    - www03
 ```
 
 call :

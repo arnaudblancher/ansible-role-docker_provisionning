@@ -10,5 +10,6 @@
 
   roles:
     - { role : arnaudblancher.docker_provisionning,
-      docker_provisionning_net: "ansible_myplateform" }
+      docker_provisionning_net: "ansible_myplateform",
+      docker_provisionning_info: true }
 

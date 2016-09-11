@@ -4,6 +4,7 @@
 # the name of the docker image you want to use for your contener
 # docker_provisionning_image must exist in directory ./dockerfiles/
 docker_provisionning_image: "ubuntu1404"
+docker_provisionning_aliases:
 
 # the name of the docker network witch will be create - free name
 docker_provisionning_net: "ansible_plateform"

@@ -1,11 +1,11 @@
 [mysql]
-dock-mysql
+dock_mysql
 
 [apache]
-dock-apache
+dock_apache
 
 [jmeter]
-dock-jmeter docker_provisionning_image="jmeter2.13"
+dock_jmeter docker_provisionning_image="jmeter2.13"
 
 [all:vars]
 ansible_connection=docker

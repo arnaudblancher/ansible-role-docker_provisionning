@@ -1,0 +1,18 @@
+---
+
+# add host aliases for containers
+# docker_provisionning_aliases:
+#   $container1_name:
+#     - $dns_alias1
+#     - $alias2
+
+docker_provisionning_aliases:
+  dock_mysql:
+    - "bdd01"
+    - "bdd02"
+  dock_apache:
+    - www01
+    - www02
+    - www03
+#  dock_jmeter:
+#    - jmeter01

@@ -3,11 +3,12 @@
 #- name: "display variables"
 #  debug: var=vars
 
-- name: "host/dockerfile wanted"
-  debug: msg="host {{item}} -> docker_provisionning_image {{ vars['hostvars'][item]['docker_provisionning_image'] }}"
+- name: "host/dockerfile wanted/alises"
+  debug: msg="host {{item}} -> docker_provisionning_image {{ vars['hostvars'][item]['docker_provisionning_image'] }} / {{ vars['docker_provisionning_aliases'][item]|d()}} " verbosity=2
   with_items: "{{hostvars}}"
+#  when: docker_provisionning_info == true
 
-- name: "docker images construction"
+- name: "docker images pull"
   docker_image:
     path: "{{ role_path }}/dockerfiles/{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
     dockerfile: "Dockerfile"
@@ -20,25 +21,32 @@
   register: _
   changed_when: "'No such network' in _.stderr"
 
+- name: "aliases"
+  debug: msg="{{vars['docker_provisionning_aliases'][item]|d()}}" verbosity=2
+  when: item != "localhost"
+  with_items: "{{hostvars}}"
+
 - name: "containers creation"
-  docker:
+  docker_container:
     name: "{{item}}"
     hostname: "{{item}}"
-    net: "{{ docker_provisionning_net }}"
     image: "{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
     state: "started"
     privileged: "yes"
     command: "tail -f /dev/null"
+    networks:
+      - name: "{{ docker_provisionning_net }}"
+        aliases: "{{vars['docker_provisionning_aliases'][item]|d()}}"
   when: item != "localhost"
   with_items: "{{hostvars}}"
 
-
 - name: "network check {{ docker_provisionning_net }}"
-  shell: docker network inspect {{ docker_provisionning_net }} | grep '\(Name\|IPv4Address\)'
+  shell: docker network inspect {{ docker_provisionning_net }}
+  #shell: docker network inspect {{ docker_provisionning_net }} | grep '\(Name\|IPv4Address\)'
   register: res
   when: docker_provisionning_info == true
 
-- name: "ipv4 address"
+- name: "info : ipv4 address"
   debug: var=res.stdout_lines
   when: docker_provisionning_info == true
 
