@@ -78,7 +78,9 @@ dock_mysql
 dock_apache docker_provisionning_image="ubuntu1604"
 
 [jmeter]
-dock_jmeter docker_provisionning_image="jmeter2.13"
+# Optionnal docker_provisionning_dockerfile specify an alternate dockerfile path outside the role;
+# the path must be relative to roles/arnaudblancher.docker_provisionning/dockerfiles/
+dock_jmeter docker_provisionning_image="jmeter2.13private"  docker_provisionning_dockerfile="../../../local_files/dockerfiles/jmeter2.13private"
 
 [all:vars]
 ansible_connection=docker
@@ -90,7 +92,7 @@ cat group_vars/all
 docker_provisionning_image: "ubuntu1404"
 ```
 
-cat inventory/docker/group_vars/all 
+cat inventory/docker/group_vars/all
 ```yaml
 # add host aliases for containers
 docker_provisionning_aliases:
