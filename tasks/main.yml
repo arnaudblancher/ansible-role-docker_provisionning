@@ -4,15 +4,15 @@
 #  debug: var=vars
 
 - name: "host/dockerfile wanted/alises"
-  debug: msg="host {{item}} -> docker_provisionning_image {{ vars['hostvars'][item]['docker_provisionning_image'] }} / {{ vars['docker_provisionning_aliases'][item]|d()}} " verbosity=2
+  debug: msg="host {{item}} -> docker_provisionning_image {{ vars['hostvars'][item]['docker_provisionning_image']|d(docker_provisionning_image) }} / aliases {{ vars['docker_provisionning_aliases'][item]|d()}} " verbosity=2
   with_items: "{{hostvars}}"
 #  when: docker_provisionning_info == true
 
 - name: "docker images pull"
   docker_image:
-    path: "{{ role_path }}/dockerfiles/{{ vars['hostvars'][item]['docker_provisionning_dockerfile']|d(vars['hostvars'][item]['docker_provisionning_image']) }}"
+    path: "{{ role_path }}/dockerfiles/{{ vars['hostvars'][item]['docker_provisionning_dockerfile']|d(docker_provisionning_image) }}"
     dockerfile: "Dockerfile"
-    name: "{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
+    name: "{{ vars['hostvars'][item]['docker_provisionning_image']|d(docker_provisionning_image) }}"
     state: present
   with_items: "{{hostvars}}"
 
@@ -30,7 +30,7 @@
   docker_container:
     name: "{{item}}"
     hostname: "{{item}}"
-    image: "{{ vars['hostvars'][item]['docker_provisionning_image'] }}"
+    image: "{{ vars['hostvars'][item]['docker_provisionning_image']|d(docker_provisionning_image) }}"
     state: "started"
     privileged: "yes"
     command: "tail -f /dev/null"
