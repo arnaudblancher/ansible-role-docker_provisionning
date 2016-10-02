@@ -12,8 +12,9 @@ ENV PLUGINS_PATH $JMETER_PATH/plugins
 # Automagically accept Oracle's license
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
-# apt-add-repository requirement :
-RUN apt-get update && apt-get -y install software-properties-common python-apt python-simplejson
+# apt-add-repository requirement and tools:
+RUN apt-get update && apt-get -y install software-properties-common python-apt python-simplejson \
+    vim curl
 
 # Install java RE for jmeter :
 RUN add-apt-repository ppa:webupd8team/java
